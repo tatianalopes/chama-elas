@@ -1,109 +1,53 @@
-# Web project template
+<h1 align="center"><img src=".github/logo.svg"/></h1>
 
-This repository contains a template for a Web project using *NodeJS*, *ReactJS* and *TypeScript*.
+<div align="center">
 
-## Getting Started
+   ![Node Badge](https://img.shields.io/badge/-Node.js-4d8939) ![React Badge](https://img.shields.io/badge/-React.js-7bdcfe)
 
-### Prerequisites
+   [Backend](#Backend) | [Frontend](#Frontend)
 
-#### MacOS
+</div>
 
-Install Homebrew
+<p align="center">
+    <img src=".github/dashboard.png">
+</p>
 
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-```
+## Prerequisites
 
-Install tools
+- yarn
+- node
 
-```
-brew install yarn
-brew install node
-```
+## Backend
 
-#### Ubuntu
+The project's backend was developed in NodeJS.
 
-Configure repository
+### Steps to run
 
-```
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-```
+1. Go to the *backend* folder
+2. Install dependencies:
+    ```
+    yarn
+    ```
+3. Run project: 
+    ```
+    yarn dev:server
+    ```
 
-Install tools
+## Frontend
 
-```
-sudo apt update
-sudo apt install yarn
-sudo apt install nodejs
-```
+The project's frontend was developed in ReactJS.
 
-#### Windows
+### Steps to run
 
-Install [Chocolatey](https://chocolatey.org/install)
-
-Install tools
-
-```
-choco install yarn
-choco install nodejs
-```
-
-### Backend
-
-#### Installing dependencies
-
-Inside the *backend* folder, run:
-
-```
-yarn
-```
-
-#### Running application
-
-```
-yarn dev:server
-```
-
-### Frontend
-
-#### Installing dependencies
-
-Inside the *frontend* folder, run:
-
-```
-yarn
-```
-
-#### Running application
-
-```
-yarn start
-```
-
-## Coding standards tools
-
-This template uses [EditorConfig](https://editorconfig.org/), [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) to enforce conding standards in the project. Both the backend and frontend folders contain the configuration files of these tools.
-
-### EditorConfig
-
-To use EditorConfig in VSCode you must install the extesion called [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig). 
-
-### Eslint
-
-To use Eslint in VSCode you must install its [Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint). 
-
-### Prettier
-
-For Prettier to work properly with this project's configurations you must not use the [Prettier - Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extesion on VSCode. 
-
-## Built With
-
-* [Node](https://nodejs.org/) - JavaScript runtime environment
-* [React](https://reactjs.org/) - JavaScript library for building user interfaces
-* [Yarn](https://yarnpkg.com/) - Package Manager
-* [Express](https://expressjs.com/) - Web framework used NodeJS
-* [TypeScript](https://www.typescriptlang.org/) - Typed Superset of JavaScrip - used as a development dependency
+1. Go to the *frontend* folder
+2. Install dependencies:
+    ```
+    yarn
+    ```
+3. Run application: 
+    ```
+    yarn start
+    ```
 
 ## Author
 
@@ -112,3 +56,8 @@ For Prettier to work properly with this project's configurations you must not us
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+<div align="center">
+  <sub>This project was creted using my
+  <a href="https://github.com/tatianalopes/web-project-template">Web project template</a>
+</div>
