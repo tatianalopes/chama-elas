@@ -1,9 +1,11 @@
 import { container } from 'tsyringe';
 
-import IExampleRepository from '@modules/example/repositories/IExampleRepository';
-import ExampleRepository from '@modules/example/repositories/ExampleRepository';
+import '@modules/user/providers';
 
-container.registerSingleton<IExampleRepository>(
-  'ExampleRepository',
-  ExampleRepository,
+import IUserRepository from '@modules/user/repositories/IUserRepository';
+import UserRepository from '@modules/user/repositories/UserRepository';
+
+container.registerSingleton<IUserRepository>(
+  'UserRepository',
+  UserRepository,
 );
