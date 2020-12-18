@@ -1,6 +1,7 @@
 import ICreateUserDto from "../dtos/ICreateUserDto";
 import IUserRepository from "./IUserRepository";
 import UserModel, { User } from "./entities/User";
+import IFindAllProfessionalsDto from "../dtos/IFindAllProfessionalsDto";
 
 class UserRepository implements IUserRepository {
 
@@ -23,8 +24,11 @@ class UserRepository implements IUserRepository {
     return UserModel.findOne({ email });
   }
 
-  public async findProfessionals(userId: string): Promise<User[]> {
-    return UserModel.find({ _id: { $ne: userId }, professionalInfo: { $exists: true }});
+  public async findProfessionals({ exceptUserId }: IFindAllProfessionalsDto): Promise<User[]> {
+    if (exceptUserId) {
+      return UserModel.find({ _id: { $ne: exceptUserId }, professionalInfo: { $exists: true } });
+    }
+    return UserModel.find({ professionalInfo: { $exists: true } });
   }
 }
 
