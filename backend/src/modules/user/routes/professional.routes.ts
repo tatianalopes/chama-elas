@@ -3,10 +3,10 @@ import { Router } from 'express';
 
 import ProfessionalController from '../controllers/ProfessionalController';
 
-const professionalRoute = Router();
+const professionalRouter = Router();
 const professionalController = new ProfessionalController();
 
-professionalRoute.get(
+professionalRouter.get(
   '/',
   celebrate({
     [Segments.BODY]: {
@@ -16,4 +16,4 @@ professionalRoute.get(
   professionalController.index,
 );
 
-export default professionalRoute;
+export default professionalRouter;

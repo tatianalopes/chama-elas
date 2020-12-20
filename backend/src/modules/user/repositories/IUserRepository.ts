@@ -8,4 +8,6 @@ export default interface IUserRepository {
   findById(id: string): Promise<User | null>;
   findByEmail(email: string): Promise<User | null>;
   findProfessionals(data: IFindAllProfessionalsDto): Promise<User[]>;
+  addFavorite(userId: string, professionalId: string): Promise<boolean>;
+  removeFavorite(userId: string, professionalId: string): Promise<boolean>;
 }
