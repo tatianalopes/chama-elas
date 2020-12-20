@@ -16,4 +16,9 @@ professionalRouter.get(
   professionalController.index,
 );
 
+professionalRouter.get(
+  '/:id',
+  professionalController.show,
+);
+
 export default professionalRouter;
