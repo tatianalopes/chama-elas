@@ -1,7 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-import { Comment } from './Comment';
-
 interface Schedule {
   day: Number;
   hour: Number;
@@ -13,7 +11,6 @@ interface Professional {
   services: Array<string>;
   schedule?: Array<Schedule>;
   rating?: Number;
-  comments?: Array<Comment['_id']>;
 }
 
 export interface User extends Document {
@@ -42,11 +39,7 @@ const ProfessionalSchema: Schema = new Schema({
     day: Number,
     hour: Number
   }],
-  rating: Number,
-  comments: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Comment'
-  }]
+  rating: Number
 });
 
 const UserSchema: Schema = new Schema({

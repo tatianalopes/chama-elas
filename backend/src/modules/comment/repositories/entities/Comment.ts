@@ -1,17 +1,22 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface Comment extends Document {
-  name: string;
-  avatar?: string;
+  professionalId: string;
+  userName: string;
+  userAvatar?: string;
   comment: string;
 }
 
 const CommentSchema: Schema = new Schema({
-  name: {
+  professionalId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  userName: {
     type: String,
     required: true
   },
-  avatar: String,
+  userAvatar: String,
   comment: {
     type: String,
     required: true
