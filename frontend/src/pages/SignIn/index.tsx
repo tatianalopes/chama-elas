@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Button, TextField, Checkbox, FormControlLabel } from '@material-ui/core';
 
 import logoImg from '../../resources/assets/logo.svg';
@@ -15,6 +15,11 @@ import {
 import strings from '../../resources/values/strings';
 
 const SignIn: React.FC = () => {
+  const history = useHistory();
+
+  const returnToDashboard = useCallback(() => {
+    history.push('/');
+  }, [history]);
 
   const handleSubmit = useCallback(() => {
 
@@ -25,7 +30,7 @@ const SignIn: React.FC = () => {
       <SideImage />
 
       <Content>
-        <img src={logoImg} alt="ChamaElas" />
+        <img src={logoImg} alt="ChamaElas" onClick={returnToDashboard} />
         <Header>{strings.signIn_header}</Header>
 
         <GoogleButton

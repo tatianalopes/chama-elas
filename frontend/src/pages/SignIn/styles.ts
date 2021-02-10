@@ -21,6 +21,10 @@ export const Content = styled.div`
   width: 100%;
   max-width: 700px;
 
+  img {
+    cursor: pointer;
+  }
+
   form {
     margin-top: 35px;
     width: 340px;

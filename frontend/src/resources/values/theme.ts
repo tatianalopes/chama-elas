@@ -34,5 +34,10 @@ export default createMuiTheme({
         color: colors.gray,
       },
     },
+    MuiButton: {
+      root: {
+        borderRadius: 8,
+      },
+    },
   }
 });

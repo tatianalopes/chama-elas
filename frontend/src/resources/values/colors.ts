@@ -9,7 +9,17 @@ const colors = {
   grayLight: '#C1C1C1',
   accent: '#2FA8CC',
   theme: '#d0cdde',
-  background: '#f5f6fa'
+  background: '#f5f6fa',
+
+  category_eletricity: '#E5B7E1',
+  category_hydraulics: '#B2E1AB',
+  category_paintwork: '#F0CF8F',
+  category_woodwork: '#9BDAF5',
+  category_construction: '#E9B6BF',
+  category_electrical_wiring: '#F5EC98',
+  category_general_services: '#A5B4E7',
+  category_drywall: '#E5B7E1',
+  category_glassware: '#B2E1AB'
 }
 
 export default colors;
