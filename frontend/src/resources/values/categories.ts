@@ -11,7 +11,13 @@ import glassware from '../assets/category_glassware.svg';
 import strings from './strings';
 import colors from './colors';
 
-const categories = [
+export interface ICategory {
+  img: string;
+  title: string;
+  color: string;
+}
+
+const categories: ICategory[] = [
   {
     img: eletricity,
     title: strings.category_eletricity,

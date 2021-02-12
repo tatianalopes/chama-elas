@@ -12,11 +12,12 @@ const strings = {
   signIn_register: 'Cadastre-se',
   signIn_google: 'Continuar com Google',
 
-  dashboard_becomeAProfessional: 'Seja uma profissional',
-  dashboard_welcome: 'As melhores profissionais para os mais diversos serivços em um só lugar',
-  dashboard_search: 'Buscar',
-  dashboard_categories: 'Categorias',
-  dashboard_professionals: 'Professionais',
+  navbar_becomeAProfessional: 'Seja uma profissional',
+
+  home_welcome: 'As melhores profissionais para os mais diversos serivços em um só lugar',
+  home_search: 'Buscar',
+  home_categories: 'Categorias',
+  home_professionals: 'Professionais',
 
   category_eletricity: 'Elétrica',
   category_hydraulics: 'Hidráulica',
@@ -26,7 +27,13 @@ const strings = {
   category_electrical_wiring: 'Instalação',
   category_general_services: 'Serviços gerais',
   category_drywall: 'Drywall',
-  category_glassware: 'Vridraria'
+  category_glassware: 'Vidraria',
+
+  dashboard_schedule_service: 'Agendar serivço',
+
+  filter_category: 'Categoria',
+  filter_availability: 'Disponibilidade',
+  filter_location: 'Região'
 }
 
 export default strings;

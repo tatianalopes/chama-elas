@@ -21,78 +21,36 @@ import {
   ProfessionalInfo
 } from './styles';
 
-import profilePic from '../../resources/assets/profile-picture.jpg';
 import strings from '../../resources/values/strings';
 import categories from '../../resources/values/categories';
+import mockProfessionals, { IProfessional } from '../../resources/values/professionals';
 import Navbar from '../../components/Navbar';
-
-export interface Professional {
-  id: string;
-  name: string;
-  avatar: string;
-  rating: number;
-  isFavorite: boolean;
-  description: string;
-}
 
 const Home: React.FC = () => {
   const history = useHistory();
 
-  const [professionals, setProfessionals] = useState<Professional[]>([]);
+  const [professionals, setProfessionals] = useState<IProfessional[]>([]);
 
   // TODO: get values from API
   useEffect(() => {
-    const tempProfessionals = [
-      {
-        id: "p1",
-        name: "Amanda Andrade",
-        avatar: profilePic,
-        rating: 2.5,
-        isFavorite: false,
-        description: "Sou profissional da categoria Reformas e Reparos, e faço serviços relacionados a Eletricista, Gesso e DryWall, Pintor, Vidraceiro, Serralheria e Solda, Encanador.",
-      },
-      {
-        id: "p2",
-        name: "Júlia Albuquerque",
-        avatar: profilePic,
-        rating: 4,
-        isFavorite: true,
-        description: "Sou profissional da categoria Reformas e Reparos, e faço serviços relacionados a Eletricista, Gesso e DryWall, Pintor, Vidraceiro, Serralheria e Solda, Encanador.",
-      },
-    ];
-    setProfessionals(tempProfessionals);
+    setProfessionals(mockProfessionals);
   }, []);
 
   const handleCategoryClick = useCallback((category) => {
     history.push({
       pathname: '/dashboard',
-      state: category,
+      state: {category},
     });
   }, [history]);
 
   const handleProfessionalClick = useCallback((e, professional) => {
-    if (e.target.className.includes('MuiRating')) return;
-
     history.push({
       pathname: '/professional',
       state: professional,
     });
   }, [history]);
 
-  const handleRating = useCallback((e, newRating, professionalId) => {
-    e.stopPropagation();
-
-    const updatedList = professionals.map((professional) => {
-      if (professional.id === professionalId) {
-        return {...professional, rating: newRating};
-      }
-      return professional;
-    });
-
-    setProfessionals(updatedList);
-  }, [professionals]);
-
-  const handleFavorite = useCallback((e, updatedProfessional:Professional) => {
+  const handleFavorite = useCallback((e, updatedProfessional:IProfessional) => {
     e.stopPropagation();
 
     const updatedList = professionals.map((professional) => {
@@ -110,7 +68,7 @@ const Home: React.FC = () => {
       <Navbar />
       <Background>
         <MainContent>
-          <h2>{strings.dashboard_welcome}</h2>
+          <h2>{strings.home_welcome}</h2>
           <SearchBar>
             <Autocomplete
               freeSolo
@@ -126,19 +84,19 @@ const Home: React.FC = () => {
                 </Paper>
               )}
             />
-            <Button variant="contained" color="primary">{strings.dashboard_search}</Button>
+            <Button variant="contained" color="primary">{strings.home_search}</Button>
           </SearchBar>
         </MainContent>
       </Background>
 
-      <SectionTitle>{strings.dashboard_categories}</SectionTitle>
+      <SectionTitle>{strings.home_categories}</SectionTitle>
       <SectionContainer>
         <SectionGridList cols={0} cellHeight={195} spacing={35}>
           {categories.map((category) => (
             <GridListTile key={category.title} onClick={() => handleCategoryClick(category)}>
               <CategoryCard>
                 <CategoryBackground color={category.color}>
-                  <img src={category.img} />
+                  <img src={category.img} alt={category.title} />
                 </CategoryBackground>
                 <span>{category.title}</span>
               </CategoryCard>
@@ -147,7 +105,7 @@ const Home: React.FC = () => {
         </SectionGridList>
       </SectionContainer>
 
-      <SectionTitle>{strings.dashboard_professionals}</SectionTitle>
+      <SectionTitle>{strings.home_professionals}</SectionTitle>
       <SectionContainer>
         <SectionGridList cols={0} cellHeight={195} spacing={35}>
           {professionals.map((professional) => (
@@ -155,19 +113,19 @@ const Home: React.FC = () => {
               <ProfessionalCard>
                 <ProfessionalTopContainer>
                   <ProfessionalMainContainer>
-                    <img src={professional.avatar} />
+                    <img src={professional.avatar} alt={professional.name} />
                     <ProfessionalInfo>
                       <span>{professional.name}</span>
                       <Rating
                         value={professional.rating}
                         size="small" precision={0.5}
-                        onChange={(e, newRating) => handleRating(e, newRating, professional.id)}
+                        readOnly
                       />
                     </ProfessionalInfo>
                   </ProfessionalMainContainer>
 
                   <button type="button" onClick={(e) => handleFavorite(e, professional)}>
-                    {professional.isFavorite ? <FavoriteFillIcon color="primary" /> : <FavoriteBorderIcon color="disabled" />}
+                    {professional.isFavorite ? <FavoriteFillIcon color="primary" /> : <FavoriteBorderIcon color="action" />}
                   </button>
                 </ProfessionalTopContainer>
 

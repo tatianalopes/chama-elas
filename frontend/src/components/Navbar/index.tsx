@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
         </Logo>
 
         <div>
-          <ButtonProfessional to='/professional-signup' >{strings.dashboard_becomeAProfessional}</ButtonProfessional>
+          <ButtonProfessional to='/professional-signup' >{strings.navbar_becomeAProfessional}</ButtonProfessional>
           <ButtonSignIn
             onClick={() => history.push('/signin')}
             variant="contained"
