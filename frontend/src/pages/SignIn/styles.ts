@@ -15,8 +15,10 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+
   background: white;
-  padding-top: 60px;
+  padding-top: 50px;
 
   width: 100%;
   max-width: 700px;
@@ -77,7 +79,7 @@ export const EmailSection = styled.div`
   text-transform: uppercase;
   font-size: 16px;
 
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   &:before, &:after{
     content: "";

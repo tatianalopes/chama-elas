@@ -12,6 +12,13 @@ const strings = {
   signIn_register: 'Cadastre-se',
   signIn_google: 'Continuar com Google',
 
+  signUp_header: 'Crie sua conta',
+  signUp_name: 'Nome',
+  signUp_passwordConfirmation: 'Confirmar senha',
+  signUp_button: 'Criar conta',
+  signUp_hasAccount: 'Já tem conta?',
+  signUp_signIn: 'Conecte-se',
+
   navbar_becomeAProfessional: 'Seja uma profissional',
 
   home_welcome: 'As melhores profissionais para os mais diversos serivços em um só lugar',
