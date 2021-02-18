@@ -1,6 +1,9 @@
 import React, { useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Button, TextField, Checkbox, FormControlLabel } from '@material-ui/core';
+import { Button, FormControlLabel, TextField, Checkbox } from '@material-ui/core';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 import logoImg from '../../resources/assets/logo.svg';
 import {
@@ -14,6 +17,19 @@ import {
 } from './styles';
 import strings from '../../resources/values/strings';
 
+interface SignInFormData {
+  email: string;
+  password: string;
+  rememberPassword: boolean;
+}
+
+const yupSchema = Yup.object().shape({
+  email: Yup.string()
+    .required('E-mail obrigatório')
+    .email('Digite um e-mail válido'),
+  password: Yup.string().required('Senha obrigatória'),
+});
+
 const SignIn: React.FC = () => {
   const history = useHistory();
 
@@ -21,9 +37,13 @@ const SignIn: React.FC = () => {
     history.push('/');
   }, [history]);
 
-  const handleSubmit = useCallback(() => {
-
-  }, []);
+  const { register, handleSubmit, errors } = useForm({ resolver: yupResolver(yupSchema) });
+  const onSubmit = useCallback(
+    async (data: SignInFormData) => {
+      history.push('/');
+    },
+    [history]
+  );
 
   return (
     <Container>
@@ -39,12 +59,22 @@ const SignIn: React.FC = () => {
           cookiePolicy={'single_host_origin'}
         />
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <EmailSection>Ou Entre com seu Email</EmailSection>
 
-          <TextField id="email" label={strings.email} variant="outlined" margin="dense"/>
           <TextField
-            id="password"
+            name="email"
+            error={!!errors.email}
+            inputRef={register}
+            type="email"
+            label={strings.email}
+            variant="outlined"
+            margin="dense"
+          />
+          <TextField
+            name="password"
+            error={!!errors.password}
+            inputRef={register}
             type="password"
             label={strings.password}
             variant="outlined"
@@ -53,13 +83,13 @@ const SignIn: React.FC = () => {
 
           <PasswordContainer>
             <FormControlLabel
-              control={<Checkbox color="primary" />}
+              control={<Checkbox name="rememberPassword" color="primary" />}
               label={strings.signIn_rememberPassword}
             />
             <Link to="/forgot-password">{strings.signIn_forgotPassword}</Link>
           </PasswordContainer>
 
-          <Button variant="contained" color="primary">{strings.signIn_button}</Button>
+          <Button type="submit" variant="contained" color="primary">{strings.signIn_button}</Button>
         </form>
 
         <p>{strings.signIn_noAccount} <Link to="/signup">{strings.signIn_register}</Link></p>
