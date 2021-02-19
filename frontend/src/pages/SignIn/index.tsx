@@ -30,8 +30,8 @@ interface SignInFormData {
 }
 
 const yupSchema = Yup.object().shape({
-  email: Yup.string().required(strings.signIn_email_required),
-  password: Yup.string().required(strings.signIn_password_required),
+  email: Yup.string().required(strings.field_required),
+  password: Yup.string().required(strings.field_required),
 });
 
 const SignIn: React.FC = () => {

@@ -3,6 +3,7 @@ const strings = {
 
   email: 'Email',
   password: 'Senha',
+  field_required: 'Campo obrigatório',
 
   signIn_header: 'Bem-vinda de volta',
   signIn_email_section: 'Ou Entre com seu Email',
@@ -12,8 +13,6 @@ const strings = {
   signIn_noAccount: 'Não tem uma conta?',
   signIn_register: 'Cadastre-se',
   signIn_google: 'Continuar com Google',
-  signIn_email_required: 'Email é obrigatório',
-  signIn_password_required: 'Senha é obrigatória',
   signIn_error_credentials: 'Email ou senha incorretos',
 
   signUp_header: 'Crie sua conta',
@@ -22,6 +21,8 @@ const strings = {
   signUp_button: 'Criar conta',
   signUp_hasAccount: 'Já tem conta?',
   signUp_signIn: 'Conecte-se',
+  signUp_passwordConfirmation_error: 'As senhas não são iguais',
+  signUp_error: 'Ocorreu um erro ao fazer cadastro, tente novamente',
 
   navbar_becomeAProfessional: 'Seja uma profissional',
 

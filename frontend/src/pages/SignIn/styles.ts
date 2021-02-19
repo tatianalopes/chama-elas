@@ -6,6 +6,8 @@ import sideImg from '../../resources/assets/sign-in_side-image.png';
 import colors from '../../resources/values/colors';
 
 export const Container = styled.div`
+  height: 100vh;
+
   display: flex;
   align-items: stretch;
 `;
@@ -15,6 +17,7 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: auto;
 
   background: white;
   padding-top: 50px;

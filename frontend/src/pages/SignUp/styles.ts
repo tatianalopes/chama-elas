@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button as MaterialButton } from '@material-ui/core';
 
 import sideImg from '../../resources/assets/sign-up_side-image.svg';
 import colors from '../../resources/values/colors';
@@ -15,6 +16,7 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: auto;
 
   background: white;
   padding-top: 60px;
@@ -33,9 +35,10 @@ export const Content = styled.div`
     flex-direction: column;
     text-align: center;
 
-    button {
-      width: 100%;
-      margin: 40px 0px;
+    div {
+      &.MuiAlert-root {
+        margin-bottom: 10px;
+      }
     }
   }
 
@@ -51,6 +54,13 @@ export const Content = styled.div`
         color: ${colors.primaryDark};
       }
     }
+  }
+`;
+
+export const FormButton = styled(MaterialButton)`
+  &.MuiButton-root {
+    width: 100%;
+    margin: 20px 0px;
   }
 `;
 
