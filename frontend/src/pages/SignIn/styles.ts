@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import GoogleLogin from 'react-google-login';
+import { Button as MaterialButton } from '@material-ui/core';
 
 import sideImg from '../../resources/assets/sign-in_side-image.png';
 import colors from '../../resources/values/colors';
 
 export const Container = styled.div`
-  height: 100vh;
-
   display: flex;
   align-items: stretch;
 `;
@@ -34,9 +33,10 @@ export const Content = styled.div`
     flex-direction: column;
     text-align: center;
 
-    button {
-      width: 100%;
-      margin: 20px 0px;
+    div {
+      &.MuiAlert-root {
+        margin-bottom: 10px;
+      }
     }
   }
 
@@ -52,6 +52,13 @@ export const Content = styled.div`
         color: ${colors.primaryDark};
       }
     }
+  }
+`;
+
+export const FormButton = styled(MaterialButton)`
+  &.MuiButton-root {
+    width: 100%;
+    margin: 20px 0px;
   }
 `;
 

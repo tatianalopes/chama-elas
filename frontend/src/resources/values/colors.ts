@@ -10,6 +10,7 @@ const colors = {
   accent: '#2FA8CC',
   theme: '#d0cdde',
   background: '#f5f6fa',
+  error: '#cf2d21',
 
   category_eletricity: '#E5B7E1',
   category_hydraulics: '#B2E1AB',

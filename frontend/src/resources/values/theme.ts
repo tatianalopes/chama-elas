@@ -13,6 +13,9 @@ export default createMuiTheme({
       main: colors.secondary,
       dark: colors.secondaryDark,
       contrastText: colors.textDark,
+    },
+    error: {
+      main: colors.error,
     }
   },
   typography: {

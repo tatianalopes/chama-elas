@@ -5,12 +5,16 @@ const strings = {
   password: 'Senha',
 
   signIn_header: 'Bem-vinda de volta',
+  signIn_email_section: 'Ou Entre com seu Email',
   signIn_rememberPassword: 'Lembrar senha',
   signIn_forgotPassword: 'Esqueceu a senha?',
   signIn_button: 'Entrar',
   signIn_noAccount: 'Não tem uma conta?',
   signIn_register: 'Cadastre-se',
   signIn_google: 'Continuar com Google',
+  signIn_email_required: 'Email é obrigatório',
+  signIn_password_required: 'Senha é obrigatória',
+  signIn_error_credentials: 'Email ou senha incorretos',
 
   signUp_header: 'Crie sua conta',
   signUp_name: 'Nome',

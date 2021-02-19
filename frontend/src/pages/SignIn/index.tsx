@@ -1,14 +1,20 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Button, FormControlLabel, TextField, Checkbox } from '@material-ui/core';
+import { FormControlLabel, TextField, Checkbox } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import { Alert } from '@material-ui/lab';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+
+import { useAuth } from '../../hooks/auth';
 
 import logoImg from '../../resources/assets/logo.svg';
 import {
   Container,
   Content,
+  FormButton,
   Header,
   GoogleButton,
   EmailSection,
@@ -24,14 +30,16 @@ interface SignInFormData {
 }
 
 const yupSchema = Yup.object().shape({
-  email: Yup.string()
-    .required('E-mail obrigatório')
-    .email('Digite um e-mail válido'),
-  password: Yup.string().required('Senha obrigatória'),
+  email: Yup.string().required(strings.signIn_email_required),
+  password: Yup.string().required(strings.signIn_password_required),
 });
 
 const SignIn: React.FC = () => {
   const history = useHistory();
+
+  const { signIn } = useAuth();
+
+  const [isFormAlertOpen, setIsFormAlertOpen] = useState(false);
 
   const returnToDashboard = useCallback(() => {
     history.push('/');
@@ -40,9 +48,18 @@ const SignIn: React.FC = () => {
   const { register, handleSubmit, errors } = useForm({ resolver: yupResolver(yupSchema) });
   const onSubmit = useCallback(
     async (data: SignInFormData) => {
-      history.push('/');
+      try {
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+
+        history.push('/');
+      } catch (err) {
+        setIsFormAlertOpen(true);
+      }
     },
-    [history]
+    [history, signIn]
   );
 
   return (
@@ -60,7 +77,25 @@ const SignIn: React.FC = () => {
         />
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <EmailSection>Ou Entre com seu Email</EmailSection>
+          <EmailSection>{strings.signIn_email_section}</EmailSection>
+
+          { isFormAlertOpen &&
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => setIsFormAlertOpen(false)}
+                >
+                <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              {strings.signIn_error_credentials}
+            </Alert>
+          }
 
           <TextField
             name="email"
@@ -70,6 +105,7 @@ const SignIn: React.FC = () => {
             label={strings.email}
             variant="outlined"
             margin="dense"
+            helperText={errors.email?.message}
           />
           <TextField
             name="password"
@@ -79,6 +115,7 @@ const SignIn: React.FC = () => {
             label={strings.password}
             variant="outlined"
             margin="dense"
+            helperText={errors.password?.message}
           />
 
           <PasswordContainer>
@@ -89,7 +126,7 @@ const SignIn: React.FC = () => {
             <Link to="/forgot-password">{strings.signIn_forgotPassword}</Link>
           </PasswordContainer>
 
-          <Button type="submit" variant="contained" color="primary">{strings.signIn_button}</Button>
+          <FormButton type="submit" variant="contained" color="primary">{strings.signIn_button}</FormButton>
         </form>
 
         <p>{strings.signIn_noAccount} <Link to="/signup">{strings.signIn_register}</Link></p>
