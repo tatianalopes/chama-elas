@@ -31,22 +31,24 @@ class UserRepository implements IUserRepository {
     return UserModel.find({ professionalInfo: { $exists: true } });
   }
 
-  public async addFavorite(userId: string, professionalId: string): Promise<boolean> {
-    const res = await UserModel.updateOne(
-      { _id: userId, 'favorites': {$ne: professionalId} },
-      { $push: { 'favorites': professionalId } }
-    );
-
-    return res.nModified > 0;
-  }
-
-  public async removeFavorite(userId: string, professionalId: string): Promise<boolean> {
-    const res = await UserModel.updateOne(
+  public async updateFavorites(userId: string, professionalId: string): Promise<User | null> {
+    return UserModel.findOneAndUpdate(
       { _id: userId },
-      { $pull: { 'favorites': professionalId } }
+      [
+        {
+          $set: {
+            favorites: {
+              $cond: [
+                { $in: [ professionalId, "$favorites" ] },
+                { $setDifference: [ "$favorites", [ professionalId ] ] },
+                { $concatArrays: [ "$favorites", [ professionalId ] ] }
+              ]
+            }
+          }
+        }
+      ],
+      { new: true }
     );
-
-    return res.nModified > 0;
   }
 }
 

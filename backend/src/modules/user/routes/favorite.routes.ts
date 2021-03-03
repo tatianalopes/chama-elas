@@ -10,26 +10,14 @@ const favoriteController = new FavoriteController();
 
 favoriteRouter.use(ensureAuthenticated);
 
-favoriteRouter.post(
+favoriteRouter.patch(
   '/',
-  ensureAuthenticated,
   celebrate({
     [Segments.BODY]: {
       professionalId: Joi.string().required(),
     },
   }),
-  favoriteController.create,
-);
-
-favoriteRouter.delete(
-  '/',
-  ensureAuthenticated,
-  celebrate({
-    [Segments.BODY]: {
-      professionalId: Joi.string().required(),
-    },
-  }),
-  favoriteController.delete,
+  favoriteController.update,
 );
 
 export default favoriteRouter;

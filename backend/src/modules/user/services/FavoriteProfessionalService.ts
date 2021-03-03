@@ -17,12 +17,14 @@ class FavoriteProfessionalService {
     private userRepository: IUserRepository,
   ) {}
 
-  public async execute({ userId, professionalId }: IRequest): Promise<void> {
-    const added = await this.userRepository.addFavorite(userId, professionalId);
+  public async execute({ userId, professionalId }: IRequest): Promise<User> {
+    const user = await this.userRepository.updateFavorites(userId, professionalId);
 
-    if (!added) {
-      throw new AppError('Could not add professional to favorites. Check if professional is not already favorited.');
+    if (!user) {
+      throw new AppError("Could update user's favorites arrays.");
     }
+
+    return user;
   }
 }
 
