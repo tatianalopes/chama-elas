@@ -103,13 +103,12 @@ export const ProfessionalCard = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   p {
     font-style: normal;
     font-weight: 300;
 
-    align-self: flex-end;
+    margin-top: 25px;
   }
 `;
 

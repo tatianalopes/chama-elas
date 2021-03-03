@@ -6,6 +6,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteFillIcon from '@material-ui/icons/Favorite';
 
+import api from '../../services/api';
+import { useAuth } from '../../hooks/auth';
+
 import {
   Background,
   MainContent,
@@ -23,18 +26,33 @@ import {
 
 import strings from '../../resources/values/strings';
 import categories from '../../resources/values/categories';
-import mockProfessionals, { IProfessional } from '../../resources/values/professionals';
+import defaultAvatar from '../../resources/assets/defaultAvatar.svg';
+import { IProfessional } from '../../resources/values/professionals';
 import Navbar from '../../components/Navbar';
 
 const Home: React.FC = () => {
   const history = useHistory();
 
+  const { user, updateUser } = useAuth();
+
   const [professionals, setProfessionals] = useState<IProfessional[]>([]);
 
-  // TODO: get values from API
   useEffect(() => {
-    setProfessionals(mockProfessionals);
-  }, []);
+    api
+      .get('/professional')
+      .then(response => {
+        setProfessionals(response.data.map((professional: any) => {
+          return {
+            id: professional._id,
+            name: professional.name,
+            avatar: professional.avatar || defaultAvatar,
+            rating: professional.professionalInfo.reating,
+            isFavorite: user?.favorites?.includes(professional._id),
+            description: professional.professionalInfo.description,
+          }
+        }));
+      });
+  }, [user]);
 
   const handleCategoryClick = useCallback((category) => {
     history.push({
@@ -53,15 +71,24 @@ const Home: React.FC = () => {
   const handleFavorite = useCallback((e, updatedProfessional:IProfessional) => {
     e.stopPropagation();
 
-    const updatedList = professionals.map((professional) => {
-      if (professional.id === updatedProfessional.id) {
-        return {...professional, isFavorite: !updatedProfessional.isFavorite};
+    if (!user) {
+      // TODO: show dialog asking if user wants to signin
+      // history.push('/signin');
+    } else {
+      try {
+        api.patch('/favorite', {
+          professionalId: updatedProfessional.id,
+        }).then(response => {
+          updateUser({
+            ...user,
+            favorites: response.data,
+          });
+        });
+      } catch(err) {
+        // TODO: handle error
       }
-      return professional;
-    });
-
-    setProfessionals(updatedList);
-  }, [professionals]);
+    }
+  }, [user, updateUser]);
 
   return (
     <>
