@@ -4,6 +4,10 @@ import { Button } from '@material-ui/core';
 
 import colors from '../../resources/values/colors';
 
+interface UserAvatarProps {
+  selected: boolean;
+}
+
 export const Container = styled.nav`
   height: 80px;
   width: 100%;
@@ -38,4 +42,28 @@ export const ButtonSignIn = styled(Button)`
     min-width: 60px;
     padding: 1px 0px;
   }
+`;
+
+export const UserAvatar = styled.div<UserAvatarProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid ${props => (props.selected ? colors.primary : "transparent")};
+
+  cursor: pointer;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+`;
+
+export const ProfileModal = styled.div`
+  width: 200px;
+  height: 120px;
 `;
