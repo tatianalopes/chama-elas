@@ -62,8 +62,3 @@ export const UserAvatar = styled.div<UserAvatarProps>`
     border-radius: 50%;
   }
 `;
-
-export const ProfileModal = styled.div`
-  width: 200px;
-  height: 120px;
-`;
