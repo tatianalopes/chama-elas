@@ -1,6 +1,9 @@
 const strings = {
   appName: 'Chama Elas',
 
+  actionBack: 'Voltar',
+  actionSelect: 'Selectionar',
+
   email: 'Email',
   password: 'Senha',
   field_required: 'Campo obrigatório',
@@ -45,7 +48,9 @@ const strings = {
 
   filter_category: 'Categoria',
   filter_availability: 'Disponibilidade',
-  filter_location: 'Região'
+  filter_location: 'Região',
+
+  sechedule_no_available_hours: 'Nenhum horário disponível nesse dia'
 }
 
 export default strings;

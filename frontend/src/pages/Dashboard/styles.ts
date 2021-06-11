@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components';
-import { Button as MaterialButton, GridList as MaterialGridList } from '@material-ui/core';
+import {
+  Button as MaterialButton,
+  GridList as MaterialGridList,
+  Dialog as MaterialDialog,
+  DialogTitle as MaterialDialogTitle
+} from '@material-ui/core';
 
 import colors from '../../resources/values/colors';
 
@@ -141,9 +146,45 @@ export const ProfessionalMainContainer = styled.div`
   }
 `;
 
-
 export const ProfessionalButton = styled(MaterialButton)`
   width: 287px;
 `;
 
+export const Dialog = styled(MaterialDialog)`
+  div.MuiDialog-paper {
+    padding: 0 54px 30px;
+    overflow: visible;
+  }
+`;
 
+export const UserAvatar = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: -50px;
+  left: 0;
+  right: 0;
+`;
+
+export const DialogTitle = styled(MaterialDialogTitle)`
+  text-align: center;
+
+  &.MuiDialogTitle-root {
+    margin-top: 44px;
+  }
+
+  p {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+`;

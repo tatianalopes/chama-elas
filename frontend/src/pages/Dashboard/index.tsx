@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { GridListTile } from '@material-ui/core';
+import { GridListTile, IconButton, DialogContent } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import CategoryIcon from '@material-ui/icons/Category';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
@@ -8,11 +8,14 @@ import LocationIcon from '@material-ui/icons/LocationOn';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteFillIcon from '@material-ui/icons/Favorite';
 import MessageIcon from '@material-ui/icons/Chat';
+import CloseIcon from '@material-ui/icons/Close';
+import Schedule from '../../components/Schedule'
 
 import Navbar from '../../components/Navbar';
 import strings from '../../resources/values/strings';
 import { ICategory } from '../../resources/values/categories';
 import mockProfessionals, { IProfessional } from '../../resources/values/professionals';
+import defaultAvatar from '../../resources/assets/defaultAvatar.svg';
 
 import {
   Filters,
@@ -25,7 +28,10 @@ import {
   ProfessionalInfo,
   ProfessionalName,
   ProfessionalMainContainer,
-  ProfessionalButton
+  ProfessionalButton,
+  Dialog,
+  UserAvatar,
+  DialogTitle
 } from './styles';
 
 interface IState {
@@ -42,6 +48,11 @@ const Dashboard: React.FC = () => {
   const [isLocationSelected, setIsLocationSelected] = useState(false);
 
   const [professionals, setProfessionals] = useState<IProfessional[]>([]);
+
+  const [scheduleModalOpen, setScheduleModelOpen] = useState(false);
+  const [selectedProfessional, setSelectedProfessional] = useState<IProfessional | undefined>();
+  const [calendarSelectedDate, setCalendarSelectedDate] = useState<Date | undefined>();
+  const [calendarAvailableDates, setCalendarAvailableDates] = useState<Date[]>([]);
 
   // TODO: get values from API
   useEffect(() => {
@@ -73,8 +84,45 @@ const Dashboard: React.FC = () => {
   const handleScheduleService = useCallback((e, professional) => {
     e.stopPropagation();
 
+    // TODO: fetch available dates for selected professional
+    setCalendarAvailableDates([new Date(2021, 5, 20), new Date(2021, 5, 21), new Date(2021, 5, 22)]);
 
+    setScheduleModelOpen(true);
+    setSelectedProfessional(professional);
   }, []);
+
+  const closeScheduleModal = () => {
+    setScheduleModelOpen(false);
+    setCalendarSelectedDate(undefined);
+  }
+
+  const handleDateSelected = (date: Date) => {
+    setScheduleModelOpen(false);
+
+    // TODO: call API to schedule service
+  }
+
+  const renderDialog = () => {
+    return (
+      <Dialog onClose={closeScheduleModal} open={scheduleModalOpen}>
+        <UserAvatar src={selectedProfessional?.avatar || defaultAvatar} alt='profile-pic'/>
+        <DialogTitle>
+          <p>{selectedProfessional?.name}</p>
+          <IconButton onClick={closeScheduleModal}>
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <Schedule
+            availableDates={calendarAvailableDates}
+            currentDate={calendarSelectedDate}
+            onDateChange={setCalendarSelectedDate}
+            onDateSelected={handleDateSelected}
+          />
+        </DialogContent>
+      </Dialog>
+    )
+  }
 
   return (
     <>
@@ -144,6 +192,7 @@ const Dashboard: React.FC = () => {
           </GridListTile>
         ))}
       </GridList>
+      {renderDialog()}
     </>
   );
 };
